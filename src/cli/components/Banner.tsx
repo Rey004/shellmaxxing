@@ -7,7 +7,7 @@ const bannerLines = [
   "  ████ █████ ████ ██   ██   ██ ██ ██ ██████   ████      ████    ██  ██ ███ ██ ██  ███",
   "    ██ ██ ██ ██   ██   ██   ██    ██ ██  ██  ██  ██    ██  ██   ██  ██   ████ ██   ██",
   "  ████ ██ ██ ████ ████ ████ ██    ██ ██  ██ ██    ██  ██    ██ ████ ██    ███  █████"
-];      
+];
 
 const gradientColors = ['#FFDD00', '#FCD303', '#FBB03B', '#FF8F00', '#FF6F00'];
 const shadowColor = '#582c00ff';
@@ -47,6 +47,8 @@ function renderLineWithLeftShadow(line: string, mainColor: string): React.ReactN
 
 export const Banner: React.FC = () => (
   <Box flexDirection="column" marginBottom={1}>
+
+    <Text color="yellow" dimColor>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</Text>
     {/* Main rows with subtle left-side shadow baked in */}
     {bannerLines.map((line, idx) =>
       renderLineWithLeftShadow(line, gradientColors[idx] ?? 'yellow')
@@ -57,7 +59,7 @@ export const Banner: React.FC = () => (
       {(bannerLines.at(-1) ?? '').slice(1).replace(/█/g, '▄')}
     </Text>
 
-    <Text color="yellow" dimColor>_______________________________________________________________________________________</Text>
+    <Text color="yellow" dimColor>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</Text>
   </Box>
 );
 
