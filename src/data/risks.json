@@ -1,0 +1,35 @@
+{
+  "ipconfig": "safe",
+  "ip addr": "safe",
+  "ifconfig": "safe",
+
+  "dir": "safe",
+  "ls": "safe",
+
+  "cd": "safe",
+  "pwd": "safe",
+
+  "mkdir": "safe",
+
+  "copy": "safe",
+  "cp": "safe",
+
+  "move": "medium",
+  "mv": "medium",
+
+  "del": "high",
+  "rm": "high",
+
+  "tasklist": "safe",
+  "ps aux": "safe",
+
+  "taskkill": "medium",
+  "kill -9": "high",
+
+  "Compress-Archive": "safe",
+  "zip -r": "safe",
+
+  "rm -rf": "critical",
+  "format": "critical",
+  "del /f": "high"
+}
