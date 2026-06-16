@@ -1,7 +1,11 @@
 <div align="center">
-  <img src="banner.svg" alt="shellmaxxing banner" width="100%" />
+  <img src="public/banner.svg" alt="shellmaxxing banner" width="100%" />
   
   <p><strong>shellmaxxing</strong> is a terminal-focused, cross-platform command assistant that maps natural language queries to shell commands with built-in risk profiling and contextual explanations.</p>
+  
+  <br />
+  
+  <img src="public/cli_ui.png" alt="shellmaxxing TUI Screenshot" width="80%" />
 </div>
 
 <br />

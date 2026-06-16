@@ -1,6 +1,4 @@
-import Fuse from 'fuse.js';
 import { loadAllCommands } from './dbLoader.js';
-import { CommandEntry } from '../pipeline/types.js';
 
 export interface Intent {
   id: string;
@@ -18,90 +16,40 @@ export interface Intent {
 // Load intents dynamically using the dbLoader
 const intents = loadAllCommands() as Intent[];
 
-// Initialize Fuse.js with options optimized for finding matches within longer sentences
-const fuse = new Fuse<Intent>(intents, {
-  keys: [
-    { name: 'intent', weight: 0.6 },
-    { name: 'aliases', weight: 0.4 }
-  ],
-  threshold: 0.8,
-  ignoreLocation: true, // Do not penalize matches that appear later in long inputs
-  findAllMatches: true,
-  includeScore: true
-});
+// Common stop words to ignore when performing semantic checks
+const STOP_WORDS = new Set([
+  'how', 'do', 'i', 'a', 'an', 'the', 'in', 'on', 'at', 'for', 'to', 'of', 'and', 'or', 'is', 'are', 'be', 'am', 
+  'want', 'please', 'can', 'you', 'tell', 'me', 'show', 'my', 'find', 'get', 'run', 'execute', 'start', 'stop', 
+  'with', 'using', 'from', 'some', 'any', 'all', 'this', 'that', 'these', 'those', 'please', 'would', 'could',
+  'should', 'help', 'info', 'about'
+]);
 
 /**
- * Checks if any intent or alias is a direct substring of the user's normalized input.
- * This ensures that if the user writes a long sentence containing the exact phrase, it matches instantly.
+ * Normalizes and stems a word to account for common plurals or suffixes.
  */
-function findSubstringMatch(input: string): Intent | null {
-  const cleanInput = input.toLowerCase().trim();
+function stemWord(word: string): string {
+  const w = word.toLowerCase().trim();
+  if (w.endsWith('s') && w.length > 3 && !w.endsWith('ss')) return w.slice(0, -1);
+  if (w.endsWith('ing') && w.length > 5) return w.slice(0, -3);
+  if (w.endsWith('ed') && w.length > 4) return w.slice(0, -2);
+  return w;
+}
+
+/**
+ * Tokenizes text into a clean list of stems (filtering out stop words when key words exist).
+ */
+function getTokens(text: string): string[] {
+  const words = text.toLowerCase()
+    .split(/[^a-zA-Z0-9]+/)
+    .filter(Boolean);
   
-  for (const item of intents) {
-    const candidates = [item.intent, ...item.aliases];
-    for (const candidate of candidates) {
-      if (cleanInput.includes(candidate.toLowerCase())) {
-        return item;
-      }
-    }
-  }
-  return null;
+  const keywords = words.filter(w => w.length >= 2 && !STOP_WORDS.has(w)).map(stemWord);
+  if (keywords.length > 0) return keywords;
+  return words.filter(w => w.length >= 2).map(stemWord);
 }
 
 /**
- * Validates that there is at least some word-level overlap/substring relationship
- * between the query and the candidate intents/aliases. This prevents loose
- * character-level matching on completely unrelated single-word inputs.
- */
-function hasWordOverlap(input: string, intent: Intent): boolean {
-  const inputWords = input.toLowerCase().split(/[^a-zA-Z0-9]+/).filter(w => w.length >= 2);
-  const candidateWords = [intent.intent, ...intent.aliases]
-    .flatMap(c => c.toLowerCase().split(/[^a-zA-Z0-9]+/))
-    .filter(w => w.length >= 2);
-
-  for (const iw of inputWords) {
-    for (const cw of candidateWords) {
-      if (iw === cw) {
-        return true;
-      }
-      // Allow prefix matching (e.g., folder vs folders) only for words that are at least 4 characters long
-      if (iw.length >= 4 && cw.length >= 4 && (iw.startsWith(cw) || cw.startsWith(iw))) {
-        return true;
-      }
-    }
-  }
-  return false;
-}
-
-function hasStrongWordOverlap(input: string, intent: Intent): boolean {
-  const inputWords = new Set(input.toLowerCase().split(/[^a-zA-Z0-9]+/).filter(w => w.length >= 2));
-  if (inputWords.size === 0) return false;
-
-  const candidates = [intent.intent, ...intent.aliases];
-  for (const candidate of candidates) {
-    const candidateWords = candidate.toLowerCase().split(/[^a-zA-Z0-9]+/).filter(w => w.length >= 2);
-    if (candidateWords.length === 0) continue;
-
-    const allPresent = candidateWords.every(cw => {
-      if (inputWords.has(cw)) return true;
-      for (const iw of inputWords) {
-        if (iw.length >= 4 && cw.length >= 4 && (iw.startsWith(cw) || cw.startsWith(iw))) {
-          return true;
-        }
-      }
-      return false;
-    });
-
-    if (allPresent) {
-      return true;
-    }
-  }
-  return false;
-}
-
-/**
- * Matches a user input string against the defined intents database.
- * Supports long, noisy inputs using substring fallback and location-insensitive fuzzy matching.
+ * Matches a user input string against the defined intents database using semantic keyword scoring.
  * @param input The natural language query or input from the user.
  * @returns The best matching Intent object, or null if no confident match is found.
  */
@@ -110,29 +58,53 @@ export function matchIntent(input: string): Intent | null {
     return null;
   }
 
-  // 1. Try a direct substring match first (extremely reliable for long inputs containing key phrases)
-  const substringMatch = findSubstringMatch(input);
-  if (substringMatch) {
-    return substringMatch;
+  // Token-based semantic matching
+  const queryTokens = getTokens(input);
+  if (queryTokens.length === 0) {
+    return null;
   }
 
-  // 2. Fall back to Fuse.js with location-insensitive matching
-  const results = fuse.search(input);
-  const limit = results.length;
+  let bestIntent: Intent | null = null;
+  let bestScore = 0;
 
-  for (let i = 0; i < limit; i++) {
-    const res = results[i];
-    if (res && res.score !== undefined) {
-      if (res.score < 0.6) {
-        if (hasWordOverlap(input, res.item)) {
-          return res.item;
-        }
-      } else if (res.score < 0.8) {
-        if (hasStrongWordOverlap(input, res.item)) {
-          return res.item;
+  for (const item of intents) {
+    const candidates = [item.intent, ...item.aliases];
+    
+    for (const candidate of candidates) {
+      const candidateTokens = getTokens(candidate);
+      if (candidateTokens.length === 0) continue;
+
+      let matchCount = 0;
+      for (const ct of candidateTokens) {
+        if (queryTokens.includes(ct)) {
+          matchCount++;
+        } else {
+          // Allow prefix/stemming matching for words >= 4 chars
+          for (const qt of queryTokens) {
+            if (qt.length >= 4 && ct.length >= 4 && (qt.startsWith(ct) || ct.startsWith(qt))) {
+              matchCount += 0.8;
+              break;
+            }
+          }
         }
       }
+
+      const recall = matchCount / candidateTokens.length;
+      const precision = matchCount / queryTokens.length;
+      
+      // Calculate a weighted score: Recall is highly weighted (85%), Precision adds specificity (15%)
+      const score = recall * 0.85 + precision * 0.15;
+
+      if (score > bestScore) {
+        bestScore = score;
+        bestIntent = item;
+      }
     }
+  }
+
+  // A threshold of 0.45 prevents unrelated queries from matching spuriously
+  if (bestScore >= 0.45) {
+    return bestIntent;
   }
 
   return null;
