@@ -45,6 +45,27 @@ function findSubstringMatch(input: string): Intent | null {
 }
 
 /**
+ * Validates that there is at least some word-level overlap/substring relationship
+ * between the query and the candidate intents/aliases. This prevents loose
+ * character-level matching on completely unrelated single-word inputs.
+ */
+function hasWordOverlap(input: string, intent: Intent): boolean {
+  const inputWords = input.toLowerCase().split(/[^a-zA-Z0-9]+/).filter(w => w.length >= 2);
+  const candidateWords = [intent.intent, ...intent.aliases]
+    .flatMap(c => c.toLowerCase().split(/[^a-zA-Z0-9]+/))
+    .filter(w => w.length >= 2);
+
+  for (const iw of inputWords) {
+    for (const cw of candidateWords) {
+      if (iw.includes(cw) || cw.includes(iw)) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
+/**
  * Matches a user input string against the defined intents database.
  * Supports long, noisy inputs using substring fallback and location-insensitive fuzzy matching.
  * @param input The natural language query or input from the user.
@@ -66,10 +87,14 @@ export function matchIntent(input: string): Intent | null {
   if (results.length > 0 && results[0]) {
     const bestResult = results[0];
     if (bestResult.score !== undefined && bestResult.score < 0.6) {
-      return bestResult.item;
+      // Validate word overlap to prevent spurious character-level matching
+      if (hasWordOverlap(input, bestResult.item)) {
+        return bestResult.item;
+      }
     }
   }
 
   return null;
 }
+
 

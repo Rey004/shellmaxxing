@@ -13,7 +13,7 @@ export const StatusBar: React.FC<StatusBarProps> = ({ platform }) => (
       <Text color="#FF8C00" bold> {platform.toUpperCase()} </Text>
     </Box>
 
-    <Text color="gray">|</Text>
+    <Text color="white">|</Text>
 
     {/* Search Shortcut */}
     <Box>
@@ -21,7 +21,7 @@ export const StatusBar: React.FC<StatusBarProps> = ({ platform }) => (
       <Text color="white"> Search </Text>
     </Box>
 
-    <Text color="gray">|</Text>
+    <Text color="white">|</Text>
 
     {/* Exit Shortcut */}
     <Box>

@@ -81,7 +81,7 @@ export const HistoryStream: React.FC<HistoryStreamProps> = ({ items }) => (
               <Box>
                 <Text color="#FFDD00" bold>Risk        </Text>
                 <Text
-                  color="black"
+                  color="white"
                   backgroundColor={getRiskBg(item.risk ?? 'unknown')}
                   bold
                 >
