@@ -1,0 +1,131 @@
+[
+  {
+    "id": "search-text-in-files",
+    "intent": "Search text in files",
+    "aliases": [
+      "grep",
+      "findstr",
+      "find word in files",
+      "search string",
+      "find text pattern"
+    ],
+    "windows": "findstr <pattern> <file>",
+    "linux": "grep <pattern> <file>",
+    "mac": "grep <pattern> <file>",
+    "description": "Find patterns in files using `regex`es. See also: `rg`, `regex`.",
+    "examples": [
+      "grep \"error\" log.txt",
+      "grep -r \"todo\" ./src",
+      "grep \"{{search_pattern}}\" {{path/to/file1 path/to/file2 ...}}",
+      "grep {{[-F|--fixed-strings]}} \"{{exact_string}}\" {{path/to/file}}",
+      "grep {{[-rI|--recursive --binary-files=without-match]}} \"{{search_pattern}}\" {{path/to/directory}}",
+      "grep {{--context|--before-context|--after-context}} 3 \"{{search_pattern}}\" {{path/to/file}}",
+      "grep {{[-Hn|--with-filename --line-number]}} --color=always \"{{search_pattern}}\" {{path/to/file}}",
+      "grep {{[-o|--only-matching]}} \"{{search_pattern}}\" {{path/to/file}}",
+      "cat {{path/to/file}} | grep {{[-v|--invert-match]}} \"{{search_pattern}}\"",
+      "grep {{[-Ei|--extended-regexp --ignore-case]}} \"{{search_pattern}}\" {{path/to/file}}"
+    ],
+    "category": "text_processing",
+    "riskLevel": "safe"
+  },
+  {
+    "id": "view-file-content",
+    "intent": "View file content",
+    "aliases": [
+      "cat",
+      "type file",
+      "print file contents",
+      "display file content",
+      "show file contents"
+    ],
+    "windows": "type <file>",
+    "linux": "cat <file>",
+    "mac": "cat <file>",
+    "description": "Print and concatenate files.",
+    "examples": [
+      "cat file.txt",
+      "type log.txt",
+      "cat {{path/to/file}}",
+      "cat {{path/to/file1 path/to/file2 ...}} > {{path/to/output_file}}",
+      "cat {{path/to/file1 path/to/file2 ...}} >> {{path/to/output_file}}",
+      "cat -u {{/dev/tty12}} > {{/dev/tty13}}",
+      "cat - > {{path/to/file}}"
+    ],
+    "category": "text_processing",
+    "riskLevel": "safe"
+  },
+  {
+    "id": "view-end-of-file",
+    "intent": "View end of file",
+    "aliases": [
+      "tail",
+      "show last lines of file",
+      "monitor log changes",
+      "tail -f log"
+    ],
+    "windows": "Get-Content <file> -Tail <lines>",
+    "linux": "tail -n <lines> <file>",
+    "mac": "tail -n <lines> <file>",
+    "description": "Display the last part of a file. See also: `head`.",
+    "examples": [
+      "tail -n 20 log.txt",
+      "tail -f log.txt",
+      "tail {{path/to/file}}",
+      "tail {{path/to/file1 path/to/file2 ...}}",
+      "tail {{[-5|--lines 5]}} {{path/to/file}}",
+      "tail {{[-n|--lines]}} +{{count}} {{path/to/file}}",
+      "tail {{[-c|--bytes]}} {{count}} {{path/to/file}}",
+      "tail {{[-f|--follow]}} {{path/to/file}}",
+      "tail {{[-F|--retry --follow]}} {{path/to/file}}",
+      "tail {{[-n|--lines]}} {{count}} {{[-s|--sleep-interval]}} {{seconds}} {{[-f|--follow]}} {{path/to/file}}"
+    ],
+    "category": "text_processing",
+    "riskLevel": "safe"
+  },
+  {
+    "id": "view-beginning-of-file",
+    "intent": "View beginning of file",
+    "aliases": [
+      "head",
+      "show first lines of file",
+      "head log",
+      "print file header"
+    ],
+    "windows": "Get-Content <file> -TotalCount <lines>",
+    "linux": "head -n <lines> <file>",
+    "mac": "head -n <lines> <file>",
+    "description": "Output the first part of files.",
+    "examples": [
+      "head -n 20 file.txt",
+      "head -n {{count}} {{path/to/file}}"
+    ],
+    "category": "text_processing",
+    "riskLevel": "safe"
+  },
+  {
+    "id": "write-message-to-screen",
+    "intent": "Write message to screen",
+    "aliases": [
+      "echo",
+      "print message",
+      "echo text",
+      "write console output"
+    ],
+    "windows": "echo <message>",
+    "linux": "echo <message>",
+    "mac": "echo <message>",
+    "description": "Print given arguments. See also: `printf`.",
+    "examples": [
+      "echo \"hello world\"",
+      "echo \"{{Hello World}}\"",
+      "echo \"{{My path is $PATH}}\"",
+      "echo -n \"{{Hello World}}\"",
+      "echo \"{{Hello World}}\" >> {{file.txt}}",
+      "echo -e \"{{Column 1\\tColumn 2}}\"",
+      "echo $?",
+      "echo \"{{Hello World}}\" | {{program}}"
+    ],
+    "category": "text_processing",
+    "riskLevel": "safe"
+  }
+]

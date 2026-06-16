@@ -1,18 +1,22 @@
 import Fuse from 'fuse.js';
-import * as fs from 'fs';
-import * as path from 'path';
+import { loadAllCommands } from './dbLoader.js';
+import { CommandEntry } from '../pipeline/types.js';
 
 export interface Intent {
+  id: string;
   intent: string;
   aliases: string[];
   windows: string;
   linux: string;
   mac: string;
+  description: string;
+  examples: string[];
+  category: string;
+  riskLevel: string;
 }
 
-// Load intents from the JSON file
-const intentsPath = path.resolve(process.cwd(), 'src/data/intents.json');
-const intents: Intent[] = JSON.parse(fs.readFileSync(intentsPath, 'utf-8'));
+// Load intents dynamically using the dbLoader
+const intents = loadAllCommands() as Intent[];
 
 // Initialize Fuse.js with options optimized for finding matches within longer sentences
 const fuse = new Fuse<Intent>(intents, {
@@ -57,9 +61,39 @@ function hasWordOverlap(input: string, intent: Intent): boolean {
 
   for (const iw of inputWords) {
     for (const cw of candidateWords) {
-      if (iw.includes(cw) || cw.includes(iw)) {
+      if (iw === cw) {
         return true;
       }
+      // Allow prefix matching (e.g., folder vs folders) only for words that are at least 4 characters long
+      if (iw.length >= 4 && cw.length >= 4 && (iw.startsWith(cw) || cw.startsWith(iw))) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
+function hasStrongWordOverlap(input: string, intent: Intent): boolean {
+  const inputWords = new Set(input.toLowerCase().split(/[^a-zA-Z0-9]+/).filter(w => w.length >= 2));
+  if (inputWords.size === 0) return false;
+
+  const candidates = [intent.intent, ...intent.aliases];
+  for (const candidate of candidates) {
+    const candidateWords = candidate.toLowerCase().split(/[^a-zA-Z0-9]+/).filter(w => w.length >= 2);
+    if (candidateWords.length === 0) continue;
+
+    const allPresent = candidateWords.every(cw => {
+      if (inputWords.has(cw)) return true;
+      for (const iw of inputWords) {
+        if (iw.length >= 4 && cw.length >= 4 && (iw.startsWith(cw) || cw.startsWith(iw))) {
+          return true;
+        }
+      }
+      return false;
+    });
+
+    if (allPresent) {
+      return true;
     }
   }
   return false;
@@ -84,12 +118,19 @@ export function matchIntent(input: string): Intent | null {
 
   // 2. Fall back to Fuse.js with location-insensitive matching
   const results = fuse.search(input);
-  if (results.length > 0 && results[0]) {
-    const bestResult = results[0];
-    if (bestResult.score !== undefined && bestResult.score < 0.6) {
-      // Validate word overlap to prevent spurious character-level matching
-      if (hasWordOverlap(input, bestResult.item)) {
-        return bestResult.item;
+  const limit = results.length;
+
+  for (let i = 0; i < limit; i++) {
+    const res = results[i];
+    if (res && res.score !== undefined) {
+      if (res.score < 0.6) {
+        if (hasWordOverlap(input, res.item)) {
+          return res.item;
+        }
+      } else if (res.score < 0.8) {
+        if (hasStrongWordOverlap(input, res.item)) {
+          return res.item;
+        }
       }
     }
   }

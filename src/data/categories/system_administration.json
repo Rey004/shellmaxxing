@@ -1,0 +1,143 @@
+[
+  {
+    "id": "show-system-uptime",
+    "intent": "Show system uptime",
+    "aliases": [
+      "system uptime",
+      "how long is system running",
+      "uptime info",
+      "machine running duration"
+    ],
+    "windows": "systeminfo | find \"System Boot Time\"",
+    "linux": "uptime",
+    "mac": "uptime",
+    "description": "Tell how long the system has been running and other information.",
+    "examples": [
+      "uptime",
+      "uptime {{[-p|--pretty]}}",
+      "uptime {{[-s|--since]}}",
+      "uptime {{[-r|--raw]}}",
+      "uptime {{[-V|--version]}}"
+    ],
+    "category": "system_administration",
+    "riskLevel": "safe"
+  },
+  {
+    "id": "check-disk-usage",
+    "intent": "Check disk usage",
+    "aliases": [
+      "disk space",
+      "df -h",
+      "free disk space",
+      "check hard drive space"
+    ],
+    "windows": "wmic logicaldisk get size,freespace,caption",
+    "linux": "df -h",
+    "mac": "df -h",
+    "description": "Display an overview of the filesystem disk space usage.",
+    "examples": [
+      "df -h",
+      "df",
+      "df {{path/to/file_or_directory}}",
+      "df -k",
+      "df -P"
+    ],
+    "category": "system_administration",
+    "riskLevel": "safe"
+  },
+  {
+    "id": "show-free-memory",
+    "intent": "Show free memory",
+    "aliases": [
+      "free ram",
+      "check memory status",
+      "system RAM usage",
+      "free memory"
+    ],
+    "windows": "systeminfo | find \"Available Physical Memory\"",
+    "linux": "free -m",
+    "mac": "vm_stat",
+    "description": "Display amount of free and used memory in the system.",
+    "examples": [
+      "free -m",
+      "free",
+      "free -{{b|k|m|g}}",
+      "free {{[-h|--human]}}",
+      "free {{[-s|--seconds]}} 2"
+    ],
+    "category": "system_administration",
+    "riskLevel": "safe"
+  },
+  {
+    "id": "run-python-script",
+    "intent": "Run python script",
+    "aliases": [
+      "python run",
+      "execute python file",
+      "python command",
+      "start python app"
+    ],
+    "windows": "python <script.py>",
+    "linux": "python <script.py>",
+    "mac": "python <script.py>",
+    "description": "Python language interpreter.",
+    "examples": [
+      "python main.py",
+      "python",
+      "python {{path/to/file.py}}",
+      "python -i {{path/to/file.py}}",
+      "python -c \"{{expression}}\"",
+      "python -m {{module}} {{arguments}}",
+      "python -m pip install {{package}}",
+      "python -m pdb {{path/to/file.py}}",
+      "python -m http.server"
+    ],
+    "category": "system_administration",
+    "riskLevel": "safe"
+  },
+  {
+    "id": "run-node-script",
+    "intent": "Run node script",
+    "aliases": [
+      "node run",
+      "execute js file",
+      "node command",
+      "start node app"
+    ],
+    "windows": "node <file.js>",
+    "linux": "node <file.js>",
+    "mac": "node <file.js>",
+    "description": "Server-side JavaScript platform (Node.js).",
+    "examples": [
+      "node index.js",
+      "node {{path/to/file}}",
+      "node",
+      "node --watch {{path/to/file}}",
+      "node {{[-e|--eval]}} \"{{code}}\"",
+      "node {{[-p|--print]}} \"process.versions\"",
+      "node --no-lazy --inspect-brk {{path/to/file}}"
+    ],
+    "category": "system_administration",
+    "riskLevel": "safe"
+  },
+  {
+    "id": "format-disk-partition",
+    "intent": "Format disk partition",
+    "aliases": [
+      "format drive",
+      "wipe disk partition",
+      "format disk",
+      "create file system"
+    ],
+    "windows": "format <drive-letter>:",
+    "linux": "mkfs -t <type> <partition>",
+    "mac": "diskutil eraseVolume <format> <name> <device>",
+    "description": "Wipe and format a disk partition or drive with a new file system.",
+    "examples": [
+      "format E:",
+      "mkfs -t ext4 /dev/sdb1"
+    ],
+    "category": "system_administration",
+    "riskLevel": "critical"
+  }
+]

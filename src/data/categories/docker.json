@@ -1,0 +1,204 @@
+[
+  {
+    "id": "run-docker-container",
+    "intent": "Run docker container",
+    "aliases": [
+      "docker run",
+      "start docker container",
+      "run container",
+      "spin up container"
+    ],
+    "windows": "docker run <image>",
+    "linux": "docker run <image>",
+    "mac": "docker run <image>",
+    "description": "This command is an alias of `docker container run`.",
+    "examples": [
+      "docker run -d -p 80:80 nginx",
+      "tldr docker container run"
+    ],
+    "category": "docker",
+    "riskLevel": "medium"
+  },
+  {
+    "id": "list-docker-containers",
+    "intent": "List docker containers",
+    "aliases": [
+      "docker ps",
+      "list containers",
+      "show active containers",
+      "running docker processes"
+    ],
+    "windows": "docker ps",
+    "linux": "docker ps",
+    "mac": "docker ps",
+    "description": "This command is an alias of `docker container ls`.",
+    "examples": [
+      "docker ps",
+      "docker ps -a",
+      "tldr docker container ls"
+    ],
+    "category": "docker",
+    "riskLevel": "safe"
+  },
+  {
+    "id": "stop-docker-container",
+    "intent": "Stop docker container",
+    "aliases": [
+      "docker stop",
+      "stop container",
+      "halt docker container"
+    ],
+    "windows": "docker stop <container-id>",
+    "linux": "docker stop <container-id>",
+    "mac": "docker stop <container-id>",
+    "description": "Stop one or more running containers.",
+    "examples": [
+      "docker stop abc12345"
+    ],
+    "category": "docker",
+    "riskLevel": "safe"
+  },
+  {
+    "id": "build-docker-image",
+    "intent": "Build docker image",
+    "aliases": [
+      "docker build",
+      "create docker image",
+      "compile dockerfile"
+    ],
+    "windows": "docker build -t <tag-name> .",
+    "linux": "docker build -t <tag-name> .",
+    "mac": "docker build -t <tag-name> .",
+    "description": "Build an image from a Dockerfile.",
+    "examples": [
+      "docker build -t my-app .",
+      "docker build .",
+      "docker build {{github.com/creack/docker-firefox}}",
+      "docker build {{[-t|--tag]}} {{name:tag}} .",
+      "docker < {{Dockerfile}} build {{[-t|--tag]}} {{name:tag}} -",
+      "docker build --no-cache {{[-t|--tag]}} {{name:tag}} .",
+      "docker build {{[-f|--file]}} {{Dockerfile}} .",
+      "docker build --build-arg {{HTTP_PROXY=http://10.20.30.2:1234}} --build-arg {{FTP_PROXY=http://40.50.60.5:4567}} ."
+    ],
+    "category": "docker",
+    "riskLevel": "medium"
+  },
+  {
+    "id": "list-docker-images",
+    "intent": "List docker images",
+    "aliases": [
+      "docker images",
+      "show docker images",
+      "view local images",
+      "docker image list"
+    ],
+    "windows": "docker images",
+    "linux": "docker images",
+    "mac": "docker images",
+    "description": "This command is an alias of `docker image ls`.",
+    "examples": [
+      "docker images",
+      "tldr docker image ls"
+    ],
+    "category": "docker",
+    "riskLevel": "safe"
+  },
+  {
+    "id": "remove-docker-container",
+    "intent": "Remove docker container",
+    "aliases": [
+      "docker rm",
+      "delete container",
+      "remove container by id",
+      "destroy container"
+    ],
+    "windows": "docker rm <container-id>",
+    "linux": "docker rm <container-id>",
+    "mac": "docker rm <container-id>",
+    "description": "This command is an alias of `docker container rm`.",
+    "examples": [
+      "docker rm abc12345",
+      "docker rm $(docker ps -a -q)",
+      "tldr docker container rm"
+    ],
+    "category": "docker",
+    "riskLevel": "medium"
+  },
+  {
+    "id": "remove-docker-image",
+    "intent": "Remove docker image",
+    "aliases": [
+      "docker rmi",
+      "delete image",
+      "remove image by id",
+      "destroy docker image"
+    ],
+    "windows": "docker rmi <image-id>",
+    "linux": "docker rmi <image-id>",
+    "mac": "docker rmi <image-id>",
+    "description": "This command is an alias of `docker image rm`.",
+    "examples": [
+      "docker rmi nginx",
+      "docker rmi abc12345",
+      "tldr docker image rm"
+    ],
+    "category": "docker",
+    "riskLevel": "medium"
+  },
+  {
+    "id": "docker-compose-up",
+    "intent": "Docker compose up",
+    "aliases": [
+      "docker-compose up",
+      "start docker compose services",
+      "compose start",
+      "docker compose run"
+    ],
+    "windows": "docker compose up -d",
+    "linux": "docker compose up -d",
+    "mac": "docker compose up -d",
+    "description": "Run and manage multi container Docker applications.",
+    "examples": [
+      "docker compose up",
+      "docker compose up -d",
+      "docker compose ps",
+      "docker compose up {{[-d|--detach]}}",
+      "docker compose up --build",
+      "docker compose {{[-p|--project-name]}} {{project_name}} {{[-f|--file]}} {{path/to/file}} up",
+      "docker compose stop",
+      "docker compose down --rmi all {{[-v|--volumes]}}",
+      "docker compose logs {{[-f|--follow]}}",
+      "docker compose logs {{[-f|--follow]}} {{container_name}}"
+    ],
+    "category": "docker",
+    "riskLevel": "medium"
+  },
+  {
+    "id": "docker-compose-down",
+    "intent": "Docker compose down",
+    "aliases": [
+      "docker-compose down",
+      "stop docker compose services",
+      "compose stop",
+      "docker compose stop"
+    ],
+    "windows": "docker compose down",
+    "linux": "docker compose down",
+    "mac": "docker compose down",
+    "description": "Run and manage multi container Docker applications.",
+    "examples": [
+      "docker compose down",
+      "docker compose down --volumes",
+      "docker compose ps",
+      "docker compose up {{[-d|--detach]}}",
+      "docker compose up --build",
+      "docker compose {{[-p|--project-name]}} {{project_name}} {{[-f|--file]}} {{path/to/file}} up",
+      "docker compose stop",
+      "docker compose down --rmi all {{[-v|--volumes]}}",
+      "docker compose logs {{[-f|--follow]}}",
+      "docker compose logs {{[-f|--follow]}} {{container_name}}"
+    ],
+    "category": "docker",
+    "riskLevel": "medium"
+  }
+]

@@ -1,0 +1,140 @@
+[
+  {
+    "id": "change-file-permissions",
+    "intent": "Change file permissions",
+    "aliases": [
+      "chmod",
+      "change permissions",
+      "make executable",
+      "file permissions",
+      "chmod permissions"
+    ],
+    "windows": "icacls <file> /grant <user>:<permissions>",
+    "linux": "chmod <permissions> <file>",
+    "mac": "chmod <permissions> <file>",
+    "description": "Change the access permissions of a file or directory.",
+    "examples": [
+      "chmod +x script.sh",
+      "chmod 755 file.txt",
+      "chmod u+x {{path/to/file}}",
+      "chmod u+rw {{path/to/file_or_directory}}",
+      "chmod g-x {{path/to/file}}",
+      "chmod a+rx {{path/to/file}}",
+      "chmod o=g {{path/to/file}}",
+      "chmod o= {{path/to/file}}",
+      "chmod {{[-R|--recursive]}} g+w,o+w {{path/to/directory}}",
+      "chmod {{[-R|--recursive]}} a+rX {{path/to/directory}}"
+    ],
+    "category": "security",
+    "riskLevel": "medium"
+  },
+  {
+    "id": "change-file-owner",
+    "intent": "Change file owner",
+    "aliases": [
+      "chown",
+      "change owner",
+      "chown owner group",
+      "set file owner"
+    ],
+    "windows": "takeown /f <file>",
+    "linux": "chown <owner>:<group> <file>",
+    "mac": "chown <owner>:<group> <file>",
+    "description": "Change user and group ownership of files and directories. See also: `chgrp`.",
+    "examples": [
+      "chown root file.txt",
+      "chown -R user:group folder",
+      "sudo chown {{user}} {{path/to/file_or_directory}}",
+      "sudo chown {{user}}:{{group}} {{path/to/file_or_directory}}",
+      "sudo chown {{user}}: {{path/to/file_or_directory}}",
+      "chown :{{group}} {{path/to/file_or_directory}}",
+      "sudo chown {{[-R|--recursive]}} {{user}} {{path/to/directory}}",
+      "sudo chown {{[-h|--no-dereference]}} {{user}} {{path/to/symlink}}",
+      "sudo chown --reference {{path/to/reference_file}} {{path/to/file_or_directory}}"
+    ],
+    "category": "security",
+    "riskLevel": "medium"
+  },
+  {
+    "id": "ssh-connect",
+    "intent": "SSH connect",
+    "aliases": [
+      "ssh login",
+      "connect to remote server",
+      "secure shell connect",
+      "ssh command"
+    ],
+    "windows": "ssh <user>@<host>",
+    "linux": "ssh <user>@<host>",
+    "mac": "ssh <user>@<host>",
+    "description": "Secure Shell is a protocol used to securely log onto remote systems. It can be used for logging or executing commands on a remote server.",
+    "examples": [
+      "ssh root@192.168.1.1",
+      "ssh -i key.pem user@host",
+      "ssh {{username}}@{{remote_host}}",
+      "ssh {{username}}@{{remote_host}} -i {{path/to/key_file}}",
+      "ssh {{username}}@10.0.0.1 -p {{2222}}",
+      "ssh {{username}}@{{remote_host}} -t {{command}} {{command_arguments}}",
+      "ssh {{username}}@{{remote_host}} -D {{1080}}",
+      "ssh {{username}}@{{remote_host}} -L {{9999}}:{{example.org}}:{{80}} -N -T",
+      "ssh {{username}}@{{remote_host}} -J {{username}}@{{jump_host}}",
+      "<Enter><~><.>"
+    ],
+    "category": "security",
+    "riskLevel": "safe"
+  },
+  {
+    "id": "generate-ssh-key",
+    "intent": "Generate SSH key",
+    "aliases": [
+      "ssh-keygen",
+      "create ssh key",
+      "generate public private key pair",
+      "new ssh key"
+    ],
+    "windows": "ssh-keygen -t rsa -b 4096 -C <email>",
+    "linux": "ssh-keygen -t rsa -b 4096 -C <email>",
+    "mac": "ssh-keygen -t rsa -b 4096 -C <email>",
+    "description": "Generate SSH keys used for authentication, password-less logins, and other things. See also: `ssh-copy-id`.",
+    "examples": [
+      "ssh-keygen -t ed25519 -C \"email@example.com\"",
+      "ssh-keygen",
+      "ssh-keygen -f {{~/.ssh/filename}} -t ed25519 -a 32",
+      "ssh-keygen -t rsa -b 4096 -C \"{{comment|email}}\"",
+      "ssh-keygen -R {{remote_host}}",
+      "ssh-keygen -f {{~/.ssh/filename}} -l -E md5",
+      "ssh-keygen -f {{~/.ssh/filename}} -p",
+      "ssh-keygen -f {{~/.ssh/OpenSSH_private_key}} -p -m PEM",
+      "ssh-keygen -f {{~/.ssh/OpenSSH_private_key}} -y"
+    ],
+    "category": "security",
+    "riskLevel": "safe"
+  },
+  {
+    "id": "enable-firewall",
+    "intent": "Enable firewall",
+    "aliases": [
+      "turn on firewall",
+      "activate firewall",
+      "enable ufw",
+      "netsh firewall on"
+    ],
+    "windows": "netsh advfirewall set allprofiles state on",
+    "linux": "sudo ufw enable",
+    "mac": "sudo pfctl -E",
+    "description": "Uncomplicated Firewall. Frontend for `iptables` aiming to make configuration of a firewall easier.",
+    "examples": [
+      "sudo ufw enable",
+      "netsh advfirewall set allprofiles state on",
+      "sudo ufw disable",
+      "sudo ufw status numbered",
+      "sudo ufw allow 5432 comment \"{{Service}}\"",
+      "sudo ufw allow proto tcp from 192.168.0.4 to any port 22",
+      "sudo ufw deny 80",
+      "sudo ufw deny proto udp from any to any port 8412:8500",
+      "sudo ufw delete {{rule_number}}"
+    ],
+    "category": "security",
+    "riskLevel": "medium"
+  }
+]

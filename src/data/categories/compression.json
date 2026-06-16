@@ -1,0 +1,84 @@
+[
+  {
+    "id": "extract-tar-archive",
+    "intent": "Extract tar archive",
+    "aliases": [
+      "tar xvf",
+      "extract tarball",
+      "unzip tar file",
+      "untar archive"
+    ],
+    "windows": "tar -xvf <archive.tar>",
+    "linux": "tar -xvf <archive.tar>",
+    "mac": "tar -xvf <archive.tar>",
+    "description": "Archiving utility. Often combined with a compression method, such as `gzip` or `bzip2`.",
+    "examples": [
+      "tar -xvf archive.tar",
+      "tar -zxvf archive.tar.gz",
+      "tar cf {{path/to/target.tar}} {{path/to/file1 path/to/file2 ...}}",
+      "tar czf {{path/to/target.tar.gz}} {{path/to/file1 path/to/file2 ...}}",
+      "tar czf {{path/to/target.tar.gz}} {{[-C|--directory]}} {{path/to/directory}} .",
+      "tar xvf {{path/to/source.tar[.gz|.bz2|.xz]}}",
+      "tar xf {{path/to/source.tar[.gz|.bz2|.xz]}} {{[-C|--directory]}} {{path/to/directory}}",
+      "tar caf {{path/to/target.tar.xz}} {{path/to/file1 path/to/file2 ...}}",
+      "tar tvf {{path/to/source.tar}}",
+      "tar xf {{path/to/source.tar}} --wildcards \"{{*.html}}\""
+    ],
+    "category": "compression",
+    "riskLevel": "safe"
+  },
+  {
+    "id": "create-tar-archive",
+    "intent": "Create tar archive",
+    "aliases": [
+      "tar cvf",
+      "create tarball",
+      "tar files",
+      "make tar archive"
+    ],
+    "windows": "tar -cvf <archive.tar> <files>",
+    "linux": "tar -cvf <archive.tar> <files>",
+    "mac": "tar -cvf <archive.tar> <files>",
+    "description": "Archiving utility. Often combined with a compression method, such as `gzip` or `bzip2`.",
+    "examples": [
+      "tar -cvf archive.tar file1 file2",
+      "tar -zcvf archive.tar.gz folder",
+      "tar cf {{path/to/target.tar}} {{path/to/file1 path/to/file2 ...}}",
+      "tar czf {{path/to/target.tar.gz}} {{path/to/file1 path/to/file2 ...}}",
+      "tar czf {{path/to/target.tar.gz}} {{[-C|--directory]}} {{path/to/directory}} .",
+      "tar xvf {{path/to/source.tar[.gz|.bz2|.xz]}}",
+      "tar xf {{path/to/source.tar[.gz|.bz2|.xz]}} {{[-C|--directory]}} {{path/to/directory}}",
+      "tar caf {{path/to/target.tar.xz}} {{path/to/file1 path/to/file2 ...}}",
+      "tar tvf {{path/to/source.tar}}",
+      "tar xf {{path/to/source.tar}} --wildcards \"{{*.html}}\""
+    ],
+    "category": "compression",
+    "riskLevel": "safe"
+  },
+  {
+    "id": "unzip-file",
+    "intent": "Unzip file",
+    "aliases": [
+      "unzip archive",
+      "extract zip",
+      "expand zip file",
+      "uncompress zip"
+    ],
+    "windows": "Expand-Archive -Path <file.zip> -DestinationPath <folder>",
+    "linux": "unzip <file.zip>",
+    "mac": "unzip <file.zip>",
+    "description": "Extract files/directories from Zip archives. See also: `zip`.",
+    "examples": [
+      "unzip file.zip",
+      "unzip file.zip -d destination_folder",
+      "unzip {{path/to/archive1.zip path/to/archive2.zip ...}}",
+      "unzip {{path/to/archive1.zip path/to/archive2.zip ...}} -d {{path/to/output}}",
+      "unzip -c {{path/to/archive1.zip path/to/archive2.zip ...}}",
+      "unzip -O {{gbk}} {{path/to/archive1.zip path/to/archive2.zip ...}}",
+      "unzip -l {{path/to/archive}}.zip",
+      "unzip -j {{path/to/archive}}.zip {{path/to/file1_in_archive path/to/file2_in_archive ...}}"
+    ],
+    "category": "compression",
+    "riskLevel": "safe"
+  }
+]

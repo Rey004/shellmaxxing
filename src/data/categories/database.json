@@ -1,0 +1,101 @@
+[
+  {
+    "id": "connect-to-postgresql",
+    "intent": "Connect to postgresql",
+    "aliases": [
+      "psql",
+      "postgres login",
+      "connect pg database",
+      "postgresql cli"
+    ],
+    "windows": "psql -h <host> -U <user> -d <database>",
+    "linux": "psql -h <host> -U <user> -d <database>",
+    "mac": "psql -h <host> -U <user> -d <database>",
+    "description": "PostgreSQL client.",
+    "examples": [
+      "psql -h localhost -U postgres -d my_db",
+      "psql {{database}}",
+      "psql {{[-h|--host]}} {{host}} {{[-p|--port]}} {{port}} {{[-U|--username]}} {{username}} {{database}}",
+      "psql {{[-h|--host]}} {{host}} {{[-p|--port]}} {{port}} {{[-U|--username]}} {{username}} {{[-W|--password]}} {{database}}",
+      "psql {{[-c|--command]}} '{{query}}' {{database}}",
+      "psql {{database}} {{[-f|--file]}} {{path/to/file.sql}}"
+    ],
+    "category": "database",
+    "riskLevel": "safe"
+  },
+  {
+    "id": "connect-to-mysql",
+    "intent": "Connect to mysql",
+    "aliases": [
+      "mysql login",
+      "connect mysql database",
+      "mysql cli",
+      "mariadb connect"
+    ],
+    "windows": "mysql -h <host> -u <user> -p",
+    "linux": "mysql -h <host> -u <user> -p",
+    "mac": "mysql -h <host> -u <user> -p",
+    "description": "The MySQL tool.",
+    "examples": [
+      "mysql -u root -p",
+      "mysql {{database_name}}",
+      "mysql {{[-u|--user]}} {{user}} {{[-p|--password]}} {{database_name}}",
+      "mysql {{[-h|--host]}} {{database_host}} {{database_name}}",
+      "mysql {{[-S|--socket]}} {{path/to/socket.sock}}",
+      "mysql {{[-e|--execute]}} \"source {{filename.sql}}\" {{database_name}}",
+      "mysql < {{path/to/backup.sql}} {{[-u|--user]}} {{user}} {{[-p|--password]}} {{database_name}}",
+      "mysql < {{path/to/backup.sql}} {{[-u|--user]}} {{user}} {{[-p|--password]}}"
+    ],
+    "category": "database",
+    "riskLevel": "safe"
+  },
+  {
+    "id": "connect-to-redis",
+    "intent": "Connect to redis",
+    "aliases": [
+      "redis-cli",
+      "redis command line",
+      "connect redis server",
+      "redis cli connect"
+    ],
+    "windows": "redis-cli -h <host> -p <port>",
+    "linux": "redis-cli -h <host> -p <port>",
+    "mac": "redis-cli -h <host> -p <port>",
+    "description": "Open a connection to a Redis server.",
+    "examples": [
+      "redis-cli",
+      "redis-cli -h 127.0.0.1 -p 6379",
+      "redis-cli -h {{host}}",
+      "redis-cli -h {{host}} -p {{port}}",
+      "redis-cli -u {{uri}}",
+      "redis-cli -a {{password}}",
+      "redis-cli {{redis_command}}",
+      "redis-cli -c"
+    ],
+    "category": "database",
+    "riskLevel": "safe"
+  },
+  {
+    "id": "connect-to-mongodb",
+    "intent": "Connect to mongodb",
+    "aliases": [
+      "mongosh",
+      "mongo shell",
+      "connect mongodb database",
+      "mongo connect cli"
+    ],
+    "windows": "mongosh <connection-string>",
+    "linux": "mongosh <connection-string>",
+    "mac": "mongosh <connection-string>",
+    "description": "A new shell for MongoDB, replacement for `mongo`. Note: All connection options can be replaced with one string: `mongodb://user@host:port/db_name?authSource=authdb_name`.",
+    "examples": [
+      "mongosh \"mongodb://localhost:27017\"",
+      "mongosh",
+      "mongosh --host {{host}} --port {{port}} {{db_name}}",
+      "mongosh --host {{host}} --port {{port}} --username {{username}} --authenticationDatabase {{authdb_name}} {{db_name}}",
+      "mongosh --eval '{{JSON.stringify(db.foo.findOne())}}' {{db_name}}"
+    ],
+    "category": "database",
+    "riskLevel": "safe"
+  }
+]

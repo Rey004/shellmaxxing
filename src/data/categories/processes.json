@@ -1,0 +1,80 @@
+[
+  {
+    "id": "show-running-processes",
+    "intent": "Show running processes",
+    "aliases": [
+      "list processes",
+      "running programs",
+      "active processes",
+      "show task manager"
+    ],
+    "windows": "tasklist",
+    "linux": "ps aux",
+    "mac": "ps aux",
+    "description": "Information about running processes.",
+    "examples": [
+      "ps aux",
+      "tasklist",
+      "ps auxww",
+      "ps aux | grep {{[s]tring}}",
+      "ps {{[-u|--user]}} $(id {{[-u|--user]}}) -F",
+      "ps {{[-u|--user]}} $(id {{[-u|--user]}}) f",
+      "ps {{[-o|--format]}} ppid= {{[-p|--pid]}} {{pid}}",
+      "ps --sort size"
+    ],
+    "category": "processes",
+    "riskLevel": "safe"
+  },
+  {
+    "id": "kill-process",
+    "intent": "Kill process",
+    "aliases": [
+      "stop process",
+      "terminate process",
+      "end process",
+      "kill process by pid"
+    ],
+    "windows": "taskkill /PID <pid> /F",
+    "linux": "kill -9 <pid>",
+    "mac": "kill -9 <pid>",
+    "description": "Send a signal to a process, usually related to stopping the process. All signals except for SIGKILL and SIGSTOP can be intercepted by the process to perform a clean exit.",
+    "examples": [
+      "kill -9 1234",
+      "taskkill /PID 1234 /F",
+      "kill {{process_id}}",
+      "kill -l",
+      "kill {{[-1|-HUP]}} {{process_id}}",
+      "kill {{[-2|-INT]}} {{process_id}}",
+      "kill {{[-9|-KILL]}} {{process_id}}",
+      "kill {{[-19|-STOP]}} {{process_id}}",
+      "kill -SIGUSR1 -{{group_id}}"
+    ],
+    "category": "processes",
+    "riskLevel": "high"
+  },
+  {
+    "id": "show-system-resource-usage",
+    "intent": "Show system resource usage",
+    "aliases": [
+      "monitor cpu",
+      "check memory consumption",
+      "show resource load",
+      "view system stats"
+    ],
+    "windows": "taskmgr",
+    "linux": "top",
+    "mac": "top",
+    "description": "Display dynamic real-time information about running processes. See also: `htop`, `atop`, `glances`, `btop`, `btm`.",
+    "examples": [
+      "top",
+      "top {{[-i|--idle-toggle]}}",
+      "top {{[-u|--filter-only-euser]}} {{username}}",
+      "top {{[-o|--sort-override]}} {{field_name}}",
+      "top {{[-Hp|--threads-show --pid]}} {{process_id}}",
+      "top {{[-p|--pid]}} $(pgrep {{[-d|--delimiter]}} ',' {{process_name}})",
+      "<?>"
+    ],
+    "category": "processes",
+    "riskLevel": "safe"
+  }
+]

@@ -1,0 +1,232 @@
+[
+  {
+    "id": "list-files-in-directory",
+    "intent": "List files in directory",
+    "aliases": [
+      "show files",
+      "display files",
+      "view files",
+      "see files",
+      "list folder contents"
+    ],
+    "windows": "dir",
+    "linux": "ls",
+    "mac": "ls",
+    "description": "List directory contents.",
+    "examples": [
+      "ls",
+      "dir",
+      "ls -1",
+      "ls {{[-a|--all]}}",
+      "ls {{[-F|--classify]}}",
+      "ls {{[-la|-l --all]}}",
+      "ls {{[-lh|-l --human-readable]}}",
+      "ls {{[-lSR|-lS --recursive]}}",
+      "ls {{[-ltr|-lt --reverse]}}",
+      "ls {{[-d|--directory]}} */"
+    ],
+    "category": "filesystem",
+    "riskLevel": "safe"
+  },
+  {
+    "id": "show-current-directory",
+    "intent": "Show current directory",
+    "aliases": [
+      "where am i",
+      "current folder",
+      "current path",
+      "show directory",
+      "get working directory"
+    ],
+    "windows": "cd",
+    "linux": "pwd",
+    "mac": "pwd",
+    "description": "Print the name of current/working directory.",
+    "examples": [
+      "pwd",
+      "pwd {{[-P|--physical]}}",
+      "pwd --help"
+    ],
+    "category": "filesystem",
+    "riskLevel": "safe"
+  },
+  {
+    "id": "create-folder",
+    "intent": "Create folder",
+    "aliases": [
+      "make directory",
+      "new folder",
+      "create directory",
+      "add directory"
+    ],
+    "windows": "mkdir <folder-name>",
+    "linux": "mkdir <folder-name>",
+    "mac": "mkdir <folder-name>",
+    "description": "Create directories and set their permissions.",
+    "examples": [
+      "mkdir my_folder",
+      "mkdir {{path/to/directory1 path/to/directory2 ...}}",
+      "mkdir {{[-p|--parents]}} {{path/to/directory1 path/to/directory2 ...}}",
+      "mkdir {{[-m|--mode]}} {{rwxrw-r--}} {{path/to/directory1 path/to/directory2 ...}}",
+      "mkdir {{[-p|--parents]}} {{path/to/{a,b}/{x,y,z}/{h,i,j}}}"
+    ],
+    "category": "filesystem",
+    "riskLevel": "safe"
+  },
+  {
+    "id": "delete-file",
+    "intent": "Delete file",
+    "aliases": [
+      "remove file",
+      "erase file",
+      "delete a file",
+      "erase files",
+      "unlink file"
+    ],
+    "windows": "del <file>",
+    "linux": "rm <file>",
+    "mac": "rm <file>",
+    "description": "Remove files or directories. See also: `rmdir`, `trash`.",
+    "examples": [
+      "rm test.txt",
+      "del test.txt",
+      "rm {{path/to/file1 path/to/file2 ...}}",
+      "rm {{[-f|--force]}} {{path/to/file1 path/to/file2 ...}}",
+      "rm {{[-i|--interactive]}} {{path/to/file1 path/to/file2 ...}}",
+      "rm {{[-v|--verbose]}} {{path/to/file1 path/to/file2 ...}}",
+      "rm {{[-r|--recursive]}} {{path/to/file_or_directory1 path/to/file_or_directory2 ...}}",
+      "rm {{[-d|--dir]}} {{path/to/directory}}"
+    ],
+    "category": "filesystem",
+    "riskLevel": "high"
+  },
+  {
+    "id": "copy-file",
+    "intent": "Copy file",
+    "aliases": [
+      "duplicate file",
+      "copy a file",
+      "clone file"
+    ],
+    "windows": "copy <source> <destination>",
+    "linux": "cp <source> <destination>",
+    "mac": "cp <source> <destination>",
+    "description": "Copy files and directories.",
+    "examples": [
+      "cp source.txt dest.txt",
+      "cp {{path/to/source_file}} {{path/to/target_file}}",
+      "cp {{path/to/source_file}} {{path/to/target_parent_directory}}",
+      "cp {{[-r|--recursive]}} {{path/to/source_directory}} {{path/to/target_directory}}",
+      "cp {{[-vr|--verbose --recursive]}} {{path/to/source_directory}} {{path/to/target_directory}}",
+      "cp {{[-t|--target-directory]}} {{path/to/destination_directory}} {{path/to/file1 path/to/file2 ...}}",
+      "cp {{[-i|--interactive]}} {{*.ext}} {{path/to/target_directory}}",
+      "cp {{[-L|--dereference]}} {{link}} {{path/to/target_directory}}",
+      "cp --parents {{source/path/to/file}} {{path/to/target_file}}"
+    ],
+    "category": "filesystem",
+    "riskLevel": "safe"
+  },
+  {
+    "id": "move-file",
+    "intent": "Move file",
+    "aliases": [
+      "rename file",
+      "shift file",
+      "relocate file",
+      "rename folder"
+    ],
+    "windows": "move <source> <destination>",
+    "linux": "mv <source> <destination>",
+    "mac": "mv <source> <destination>",
+    "description": "Move or rename files and directories.",
+    "examples": [
+      "mv old.txt new.txt",
+      "mv {{path/to/source}} {{path/to/target}}",
+      "mv {{path/to/source}} {{path/to/existing_directory}}",
+      "mv {{path/to/source1 path/to/source2 ...}} {{path/to/existing_directory}}",
+      "mv {{[-f|--force]}} {{path/to/source}} {{path/to/target}}",
+      "mv {{[-i|--interactive]}} {{path/to/source}} {{path/to/target}}",
+      "mv {{[-n|--no-clobber]}} {{path/to/source}} {{path/to/target}}",
+      "mv {{[-v|--verbose]}} {{path/to/source}} {{path/to/target}}",
+      "{{find /var/log -type f -name '*.log' -print0}} | {{xargs -0}} mv {{[-t|--target-directory]}} {{path/to/target_directory}}"
+    ],
+    "category": "filesystem",
+    "riskLevel": "medium"
+  },
+  {
+    "id": "clear-screen",
+    "intent": "Clear screen",
+    "aliases": [
+      "cls",
+      "clear console",
+      "clear terminal",
+      "reset terminal"
+    ],
+    "windows": "cls",
+    "linux": "clear",
+    "mac": "clear",
+    "description": "Clears the screen of the terminal.",
+    "examples": [
+      "clear",
+      "cls",
+      "clear -x",
+      "clear -T {{type_of_terminal}}",
+      "clear -V"
+    ],
+    "category": "filesystem",
+    "riskLevel": "safe"
+  },
+  {
+    "id": "find-files",
+    "intent": "Find files",
+    "aliases": [
+      "search file",
+      "locate file",
+      "find files by name",
+      "where is file"
+    ],
+    "windows": "where <filename>",
+    "linux": "find . -name <filename>",
+    "mac": "find . -name <filename>",
+    "description": "Find files or directories under a directory tree, recursively. See also: `fd`.",
+    "examples": [
+      "find . -name \"*.ts\"",
+      "find {{path/to/directory}} -name '{{*.ext}}'",
+      "find {{path/to/directory}} -path '{{*/path/*/*.ext}}' -or -name '{{*pattern*}}'",
+      "find {{path/to/directory}} -type d -iname '{{*lib*}}'",
+      "find {{path/to/directory}} -name '{{*.py}}' -not -path '{{*/site-packages/*}}'",
+      "find {{path/to/directory}} -maxdepth 1 -size {{+500k}} -size {{-10M}}",
+      "find {{path/to/directory}} -name '{{*.ext}}' -exec {{wc -l}} {} \\;",
+      "find {{path/to/directory}} -daystart -mtime {{-1}} -exec {{tar -cvf archive.tar}} {} \\+",
+      "find {{path/to/directory}} -type {{f|d}} -empty -delete -print"
+    ],
+    "category": "filesystem",
+    "riskLevel": "safe"
+  },
+  {
+    "id": "force-delete-folder-recursively",
+    "intent": "Force delete folder recursively",
+    "aliases": [
+      "rm -rf",
+      "delete directory recursively",
+      "remove folder containing files",
+      "force delete folder"
+    ],
+    "windows": "rd /s /q <folder>",
+    "linux": "rm -rf <folder>",
+    "mac": "rm -rf <folder>",
+    "description": "Remove files or directories. See also: `rmdir`, `trash`.",
+    "examples": [
+      "rm -rf node_modules",
+      "rd /s /q build",
+      "rm {{path/to/file1 path/to/file2 ...}}",
+      "rm {{[-f|--force]}} {{path/to/file1 path/to/file2 ...}}",
+      "rm {{[-i|--interactive]}} {{path/to/file1 path/to/file2 ...}}",
+      "rm {{[-v|--verbose]}} {{path/to/file1 path/to/file2 ...}}",
+      "rm {{[-r|--recursive]}} {{path/to/file_or_directory1 path/to/file_or_directory2 ...}}",
+      "rm {{[-d|--dir]}} {{path/to/directory}}"
+    ],
+    "category": "filesystem",
+    "riskLevel": "critical"
+  }
+]

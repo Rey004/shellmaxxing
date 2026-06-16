@@ -1,0 +1,192 @@
+[
+  {
+    "id": "get-kubernetes-pods",
+    "intent": "Get kubernetes pods",
+    "aliases": [
+      "kubectl get pods",
+      "show pods",
+      "list pods",
+      "kubernetes list pods"
+    ],
+    "windows": "kubectl get pods",
+    "linux": "kubectl get pods",
+    "mac": "kubectl get pods",
+    "description": "Run commands against Kubernetes clusters. Some subcommands such as `run` have their own usage documentation.",
+    "examples": [
+      "kubectl get pods",
+      "kubectl get pods -n kube-system",
+      "kubectl get {{pods|service|deployment|ingress|...}} {{[-o|--output]}} wide",
+      "kubectl label pods {{name}} unhealthy=true",
+      "kubectl get all",
+      "kubectl top {{pods|nodes}}",
+      "kubectl cluster-info",
+      "kubectl explain {{pods.spec.containers}}",
+      "kubectl logs {{pod_name}}",
+      "kubectl exec {{pod_name}} -- {{ls /}}"
+    ],
+    "category": "kubernetes",
+    "riskLevel": "safe"
+  },
+  {
+    "id": "describe-kubernetes-pod",
+    "intent": "Describe kubernetes pod",
+    "aliases": [
+      "kubectl describe pod",
+      "pod details",
+      "show pod info",
+      "debug pod"
+    ],
+    "windows": "kubectl describe pod <pod-name>",
+    "linux": "kubectl describe pod <pod-name>",
+    "mac": "kubectl describe pod <pod-name>",
+    "description": "Run commands against Kubernetes clusters. Some subcommands such as `run` have their own usage documentation.",
+    "examples": [
+      "kubectl describe pod my-pod-123",
+      "kubectl get {{pods|service|deployment|ingress|...}} {{[-o|--output]}} wide",
+      "kubectl label pods {{name}} unhealthy=true",
+      "kubectl get all",
+      "kubectl top {{pods|nodes}}",
+      "kubectl cluster-info",
+      "kubectl explain {{pods.spec.containers}}",
+      "kubectl logs {{pod_name}}",
+      "kubectl exec {{pod_name}} -- {{ls /}}"
+    ],
+    "category": "kubernetes",
+    "riskLevel": "safe"
+  },
+  {
+    "id": "apply-kubernetes-configuration",
+    "intent": "Apply kubernetes configuration",
+    "aliases": [
+      "kubectl apply",
+      "deploy manifest",
+      "kubectl deploy",
+      "apply deployment"
+    ],
+    "windows": "kubectl apply -f <file.yaml>",
+    "linux": "kubectl apply -f <file.yaml>",
+    "mac": "kubectl apply -f <file.yaml>",
+    "description": "Run commands against Kubernetes clusters. Some subcommands such as `run` have their own usage documentation.",
+    "examples": [
+      "kubectl apply -f deployment.yaml",
+      "kubectl get {{pods|service|deployment|ingress|...}} {{[-o|--output]}} wide",
+      "kubectl label pods {{name}} unhealthy=true",
+      "kubectl get all",
+      "kubectl top {{pods|nodes}}",
+      "kubectl cluster-info",
+      "kubectl explain {{pods.spec.containers}}",
+      "kubectl logs {{pod_name}}",
+      "kubectl exec {{pod_name}} -- {{ls /}}"
+    ],
+    "category": "kubernetes",
+    "riskLevel": "medium"
+  },
+  {
+    "id": "view-kubernetes-logs",
+    "intent": "View kubernetes logs",
+    "aliases": [
+      "kubectl logs",
+      "get pod logs",
+      "read pod output",
+      "kubernetes logs"
+    ],
+    "windows": "kubectl logs <pod-name>",
+    "linux": "kubectl logs <pod-name>",
+    "mac": "kubectl logs <pod-name>",
+    "description": "Run commands against Kubernetes clusters. Some subcommands such as `run` have their own usage documentation.",
+    "examples": [
+      "kubectl logs my-pod-123 -f",
+      "kubectl get {{pods|service|deployment|ingress|...}} {{[-o|--output]}} wide",
+      "kubectl label pods {{name}} unhealthy=true",
+      "kubectl get all",
+      "kubectl top {{pods|nodes}}",
+      "kubectl cluster-info",
+      "kubectl explain {{pods.spec.containers}}",
+      "kubectl logs {{pod_name}}",
+      "kubectl exec {{pod_name}} -- {{ls /}}"
+    ],
+    "category": "kubernetes",
+    "riskLevel": "safe"
+  },
+  {
+    "id": "kubernetes-port-forward",
+    "intent": "Kubernetes port forward",
+    "aliases": [
+      "kubectl port-forward",
+      "forward local port",
+      "access pod port",
+      "k8s port forward"
+    ],
+    "windows": "kubectl port-forward <pod-name> <local-port>:<pod-port>",
+    "linux": "kubectl port-forward <pod-name> <local-port>:<pod-port>",
+    "mac": "kubectl port-forward <pod-name> <local-port>:<pod-port>",
+    "description": "Run commands against Kubernetes clusters. Some subcommands such as `run` have their own usage documentation.",
+    "examples": [
+      "kubectl port-forward my-pod 8080:80",
+      "kubectl get {{pods|service|deployment|ingress|...}} {{[-o|--output]}} wide",
+      "kubectl label pods {{name}} unhealthy=true",
+      "kubectl get all",
+      "kubectl top {{pods|nodes}}",
+      "kubectl cluster-info",
+      "kubectl explain {{pods.spec.containers}}",
+      "kubectl logs {{pod_name}}",
+      "kubectl exec {{pod_name}} -- {{ls /}}"
+    ],
+    "category": "kubernetes",
+    "riskLevel": "safe"
+  },
+  {
+    "id": "kubernetes-run-pod",
+    "intent": "Kubernetes run pod",
+    "aliases": [
+      "kubectl run",
+      "create new pod",
+      "kubernetes spawn container",
+      "k8s run pod"
+    ],
+    "windows": "kubectl run <pod-name> --image=<image-name>",
+    "linux": "kubectl run <pod-name> --image=<image-name>",
+    "mac": "kubectl run <pod-name> --image=<image-name>",
+    "description": "Run commands against Kubernetes clusters. Some subcommands such as `run` have their own usage documentation.",
+    "examples": [
+      "kubectl run nginx --image=nginx",
+      "kubectl get {{pods|service|deployment|ingress|...}} {{[-o|--output]}} wide",
+      "kubectl label pods {{name}} unhealthy=true",
+      "kubectl get all",
+      "kubectl top {{pods|nodes}}",
+      "kubectl cluster-info",
+      "kubectl explain {{pods.spec.containers}}",
+      "kubectl logs {{pod_name}}",
+      "kubectl exec {{pod_name}} -- {{ls /}}"
+    ],
+    "category": "kubernetes",
+    "riskLevel": "medium"
+  },
+  {
+    "id": "get-kubernetes-namespaces",
+    "intent": "Get kubernetes namespaces",
+    "aliases": [
+      "kubectl get ns",
+      "list namespaces",
+      "show k8s namespaces",
+      "kubernetes namespaces"
+    ],
+    "windows": "kubectl get namespaces",
+    "linux": "kubectl get namespaces",
+    "mac": "kubectl get namespaces",
+    "description": "Run commands against Kubernetes clusters. Some subcommands such as `run` have their own usage documentation.",
+    "examples": [
+      "kubectl get namespaces",
+      "kubectl get {{pods|service|deployment|ingress|...}} {{[-o|--output]}} wide",
+      "kubectl label pods {{name}} unhealthy=true",
+      "kubectl get all",
+      "kubectl top {{pods|nodes}}",
+      "kubectl cluster-info",
+      "kubectl explain {{pods.spec.containers}}",
+      "kubectl logs {{pod_name}}",
+      "kubectl exec {{pod_name}} -- {{ls /}}"
+    ],
+    "category": "kubernetes",
+    "riskLevel": "safe"
+  }
+]

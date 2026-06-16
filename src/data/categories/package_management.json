@@ -1,0 +1,110 @@
+[
+  {
+    "id": "install-software-packages",
+    "intent": "Install software packages",
+    "aliases": [
+      "install package",
+      "install program",
+      "apt install",
+      "brew install",
+      "winget install"
+    ],
+    "windows": "winget install <package>",
+    "linux": "sudo apt install <package>",
+    "mac": "brew install <package>",
+    "description": "Homebrew - a package manager for macOS and Linux. Some subcommands such as `install` have their own usage documentation.",
+    "examples": [
+      "brew install node",
+      "sudo apt install git",
+      "brew install {{formula|cask}}",
+      "brew list",
+      "brew upgrade {{formula|cask}}",
+      "brew update",
+      "brew outdated",
+      "brew search {{text}}",
+      "brew info {{formula|cask}}",
+      "brew doctor"
+    ],
+    "category": "package_management",
+    "riskLevel": "medium"
+  },
+  {
+    "id": "npm-install-package",
+    "intent": "Npm install package",
+    "aliases": [
+      "npm install",
+      "npm add package",
+      "node package install",
+      "npm get package"
+    ],
+    "windows": "npm install <package-name>",
+    "linux": "npm install <package-name>",
+    "mac": "npm install <package-name>",
+    "description": "Install Node packages.",
+    "examples": [
+      "npm install express",
+      "npm install -g typescript",
+      "npm {{[i|install]}}",
+      "npm {{[i|install]}} {{package_name}}@{{version}}",
+      "npm {{[i|install]}} {{package_name}} {{[-D|--save-dev]}}",
+      "npm {{[i|install]}} {{package_name}} {{[-g|--global]}}"
+    ],
+    "category": "package_management",
+    "riskLevel": "safe"
+  },
+  {
+    "id": "npm-run-dev",
+    "intent": "Npm run dev",
+    "aliases": [
+      "start dev server",
+      "npm dev",
+      "run local server",
+      "start typescript server"
+    ],
+    "windows": "npm run dev",
+    "linux": "npm run dev",
+    "mac": "npm run dev",
+    "description": "JavaScript and Node.js package manager. Manage Node.js projects and their module dependencies. Some subcommands such as `install`, `run`, etc. have their own usage documentation.",
+    "examples": [
+      "npm run dev",
+      "npm init {{[-y|--yes]}}",
+      "npm {{[i|install]}}",
+      "npm {{[i|install]}} {{package_name}}@{{version}}",
+      "npm {{[i|install]}} {{package_name}} {{[-D|--save-dev]}}",
+      "npm {{[i|install]}} {{package_name}} {{[-g|--global]}}",
+      "npm {{[r|uninstall]}} {{package_name}}",
+      "npm {{[ls|list]}}",
+      "npm {{[ls|list]}} {{[-g|--global]}} --depth {{0}}"
+    ],
+    "category": "package_management",
+    "riskLevel": "safe"
+  },
+  {
+    "id": "pip-install-python-library",
+    "intent": "Pip install python library",
+    "aliases": [
+      "pip install",
+      "python package install",
+      "install python library",
+      "pip add"
+    ],
+    "windows": "pip install <package>",
+    "linux": "pip install <package>",
+    "mac": "pip install <package>",
+    "description": "Install Python packages.",
+    "examples": [
+      "pip install requests",
+      "pip install numpy",
+      "pip install {{package1 package2 ...}}",
+      "pip install {{package1 package2 ...}} {{[-U|--upgrade]}}",
+      "pip install {{package}}=={{version}}",
+      "pip install {{[-r|--requirement]}} {{path/to/requirements.txt}}",
+      "pip install {{path/to/file.whl|path/to/file.tar.gz|path/to/directory}}",
+      "pip install git+https://{{example.com}}/{{user}}/{{repository}}.git",
+      "pip install {{[-f|--find-links]}} {{url|path/to/directory}} {{package}}",
+      "pip install {{[-e|--editable]}} ."
+    ],
+    "category": "package_management",
+    "riskLevel": "safe"
+  }
+]

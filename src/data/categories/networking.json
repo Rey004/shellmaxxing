@@ -1,0 +1,112 @@
+[
+  {
+    "id": "show-ip-address",
+    "intent": "Show ip address",
+    "aliases": [
+      "show my ip",
+      "find ip",
+      "internet address",
+      "network address",
+      "network address info"
+    ],
+    "windows": "ipconfig",
+    "linux": "ip addr",
+    "mac": "ifconfig",
+    "description": "Show/manipulate routing, devices, policy routing and tunnels. Some subcommands such as `address` have their own usage documentation.",
+    "examples": [
+      "ipconfig",
+      "ip addr",
+      "ip {{[a|address]}}",
+      "ip {{[-br|-brief]}} {{[a|address]}}",
+      "ip {{[-br|-brief]}} {{[l|link]}}",
+      "ip {{[r|route]}}",
+      "ip {{[n|neighbour]}}",
+      "sudo ip {{[l|link]}} {{[s|set]}} {{ethX}} {{up|down}}",
+      "sudo ip {{[a|address]}} {{add|delete}} {{ip_address}}/{{mask}} dev {{ethX}}",
+      "sudo ip {{[r|route]}} {{[a|add]}} default via {{ip_address}} dev {{ethX}}"
+    ],
+    "category": "networking",
+    "riskLevel": "safe"
+  },
+  {
+    "id": "ping-host",
+    "intent": "Ping host",
+    "aliases": [
+      "test connection",
+      "check network latency",
+      "ping server",
+      "test host connectivity"
+    ],
+    "windows": "ping <host>",
+    "linux": "ping -c 4 <host>",
+    "mac": "ping -c 4 <host>",
+    "description": "Send ICMP ECHO_REQUEST packets to network hosts. See also: `mtr`.",
+    "examples": [
+      "ping google.com",
+      "ping 10.0.0.1",
+      "ping -c {{count}} {{host}}",
+      "ping -i {{seconds}} {{host}}",
+      "ping -n {{host}}",
+      "ping -a {{host}}",
+      "ping -O {{host}}",
+      "ping -c {{count}} -W {{seconds}} -w {{seconds}} {{host}}",
+      "ping -6 ff02::1%{{eth0}}"
+    ],
+    "category": "networking",
+    "riskLevel": "safe"
+  },
+  {
+    "id": "check-network-ports",
+    "intent": "Check network ports",
+    "aliases": [
+      "list open ports",
+      "show network connections",
+      "view active ports",
+      "port status"
+    ],
+    "windows": "netstat -ano",
+    "linux": "ss -tuln",
+    "mac": "netstat -an",
+    "description": "Display network-related information such as open connections, open socket ports, etc. See also: `ss`.",
+    "examples": [
+      "netstat -an",
+      "ss -tuln",
+      "netstat {{[-a|--all]}}",
+      "netstat {{[-l|--listening]}}",
+      "netstat {{[-t|--tcp]}}",
+      "netstat {{[-p|--program]}}",
+      "netstat {{[-c|--continuous]}}",
+      "netstat {{[-rn|--route --numeric]}}",
+      "netstat {{[-tulpne|--tcp --udp --listening --program --numeric --extend]}}"
+    ],
+    "category": "networking",
+    "riskLevel": "safe"
+  },
+  {
+    "id": "download-file",
+    "intent": "Download file",
+    "aliases": [
+      "fetch url",
+      "download from web",
+      "curl website",
+      "wget file"
+    ],
+    "windows": "curl -O <url>",
+    "linux": "curl -O <url>",
+    "mac": "curl -O <url>",
+    "description": "Transfers data from or to a server. Supports most protocols, including HTTP, HTTPS, FTP, SCP, etc. See also: `wcurl`, `wget`.",
+    "examples": [
+      "curl -O https://example.com/file.zip",
+      "curl {{https://example.com}}",
+      "curl {{[-L|--location]}} {{[-D|--dump-header]}} - {{https://example.com}}",
+      "curl {{[-O|--remote-name]}} {{https://example.com/filename.zip}}",
+      "curl {{[-X|--request]}} POST {{[-d|--data]}} '{{name=bob}}' {{http://example.com/form}}",
+      "curl {{[-k|--insecure]}} {{[-x|--proxy]}} {{http://127.0.0.1:8080}} {{[-H|--header]}} '{{Authorization: Bearer token}}' {{[-X|--request]}} {{GET|PUT|POST|DELETE|PATCH|...}} {{https://example.com}}",
+      "curl {{[-d|--data]}} '{{{\"name\":\"bob\"}}}' {{[-H|--header]}} '{{Content-Type: application/json}}' {{http://example.com/users/1234}}",
+      "curl {{[-E|--cert]}} {{client.pem}} --key {{key.pem}} {{[-k|--insecure]}} {{https://example.com}}",
+      "curl {{[-v|--verbose]}} --resolve {{example.com}}:{{80}}:{{127.0.0.1}} {{http://example.com}}"
+    ],
+    "category": "networking",
+    "riskLevel": "safe"
+  }
+]

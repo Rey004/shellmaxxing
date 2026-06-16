@@ -1,0 +1,361 @@
+[
+  {
+    "id": "check-git-status",
+    "intent": "Check git status",
+    "aliases": [
+      "git status",
+      "status of git repository",
+      "check repository changes",
+      "git file changes"
+    ],
+    "windows": "git status",
+    "linux": "git status",
+    "mac": "git status",
+    "description": "Show the changes to files in a Git repository. List changed, added, and deleted files compared to the currently checked-out commit.",
+    "examples": [
+      "git status",
+      "git status {{[-s|--short]}}",
+      "git status {{[-sb|--short --branch]}}",
+      "git status {{[-v|--verbose]}}",
+      "git status {{[-vv|--verbose --verbose]}}",
+      "git status --show-stash",
+      "git status {{[-uno|--untracked-files=no]}}"
+    ],
+    "category": "git",
+    "riskLevel": "safe"
+  },
+  {
+    "id": "clone-git-repository",
+    "intent": "Clone git repository",
+    "aliases": [
+      "git clone",
+      "download repo",
+      "clone repository",
+      "git download"
+    ],
+    "windows": "git clone <repository>",
+    "linux": "git clone <repository>",
+    "mac": "git clone <repository>",
+    "description": "Clone an existing repository.",
+    "examples": [
+      "git clone https://github.com/user/repo.git",
+      "git clone {{remote_repository_location}} {{path/to/directory}}",
+      "git clone --recursive {{remote_repository_location}}",
+      "git clone {{[-n|--no-checkout]}} {{remote_repository_location}}",
+      "git clone {{[-l|--local]}} {{path/to/local_repository}}",
+      "git clone {{[-q|--quiet]}} {{remote_repository_location}}",
+      "git clone --depth 10 {{remote_repository_location}}",
+      "git clone {{[-b|--branch]}} {{name}} --single-branch {{remote_repository_location}}",
+      "git clone {{[-c|--config]}} core.sshCommand=\"{{ssh -i path/to/private_ssh_key}}\" {{remote_repository_location}}"
+    ],
+    "category": "git",
+    "riskLevel": "safe"
+  },
+  {
+    "id": "commit-changes-in-git",
+    "intent": "Commit changes in git",
+    "aliases": [
+      "git commit",
+      "save changes",
+      "commit changes",
+      "git save"
+    ],
+    "windows": "git commit -m <message>",
+    "linux": "git commit -m <message>",
+    "mac": "git commit -m <message>",
+    "description": "Commit files to the repository.",
+    "examples": [
+      "git commit -m \"initial commit\"",
+      "git commit",
+      "git commit {{[-m|--message]}} \"{{message}}\"",
+      "git commit {{[-F|--file]}} {{path/to/commit_message_file}}",
+      "git commit {{[-a|--all]}} {{[-m|--message]}} \"{{message}}\"",
+      "git commit {{[-S|--gpg-sign]}} {{key_id}} {{[-m|--message]}} \"{{message}}\"",
+      "git commit --amend",
+      "git commit {{path/to/file1 path/to/file2 ...}}",
+      "git commit {{[-m|--message]}} \"{{message}}\" {{[-m|--message]}} \"{{description}}\""
+    ],
+    "category": "git",
+    "riskLevel": "safe"
+  },
+  {
+    "id": "push-git-commits",
+    "intent": "Push git commits",
+    "aliases": [
+      "git push",
+      "upload commits",
+      "push changes",
+      "sync remote repo",
+      "git pull",
+      "download latest code",
+      "update branch",
+      "fetch and merge"
+    ],
+    "windows": "git push origin <branch>",
+    "linux": "git push origin <branch>",
+    "mac": "git push origin <branch>",
+    "description": "Fetch branch from a remote repository and merge it to local repository.",
+    "examples": [
+      "git push origin main",
+      "git push",
+      "git push {{remote_name}} {{local_branch}}",
+      "git push {{[-u|--set-upstream]}} {{remote_name}} {{local_branch}}",
+      "git push {{remote_name}} {{local_branch}}:{{remote_branch}}",
+      "git push --all {{remote_name}}",
+      "git push {{remote_name}} {{[-d|--delete]}} {{remote_branch}}",
+      "git push --prune {{remote_name}}",
+      "git push --tags",
+      "git pull origin main",
+      "git pull",
+      "git pull {{[-r|--rebase]}}",
+      "git pull {{remote_name}} {{branch}}"
+    ],
+    "category": "git",
+    "riskLevel": "safe"
+  },
+  {
+    "id": "switch-git-branch",
+    "intent": "Switch git branch",
+    "aliases": [
+      "git checkout",
+      "git switch",
+      "change branch",
+      "checkout branch"
+    ],
+    "windows": "git checkout <branch>",
+    "linux": "git checkout <branch>",
+    "mac": "git checkout <branch>",
+    "description": "Checkout a branch or paths to the working tree.",
+    "examples": [
+      "git checkout dev",
+      "git switch dev",
+      "git checkout -b {{branch_name}}",
+      "git checkout -b {{branch_name}} {{reference}}",
+      "git checkout {{branch_name}}",
+      "git checkout -",
+      "git checkout {{[-t|--track]}} {{remote_name}}/{{branch_name}}",
+      "git checkout .",
+      "git checkout {{path/to/file}}",
+      "git checkout {{branch_name}} -- {{path/to/file}}"
+    ],
+    "category": "git",
+    "riskLevel": "safe"
+  },
+  {
+    "id": "git-log-info",
+    "intent": "Git log info",
+    "aliases": [
+      "git log",
+      "show commit history",
+      "git commits list",
+      "view git commits"
+    ],
+    "windows": "git log --oneline",
+    "linux": "git log --oneline",
+    "mac": "git log --oneline",
+    "description": "Show a history of commits.",
+    "examples": [
+      "git log --oneline",
+      "git log -n 5",
+      "git log",
+      "git log {{[-p|--patch]}} {{path/to/file_or_directory}}",
+      "git log --stat",
+      "git log --oneline --graph",
+      "git log --oneline --decorate --all --graph",
+      "git log {{[-i|--regexp-ignore-case]}} --grep {{search_string}}",
+      "git log {{[-n|--max-count]}} {{n}} --author \"{{author}}\"",
+      "git log --before \"{{2017-01-29}}\" --after \"{{2017-01-17}}\""
+    ],
+    "category": "git",
+    "riskLevel": "safe"
+  },
+  {
+    "id": "list-git-branches",
+    "intent": "List git branches",
+    "aliases": [
+      "git branch",
+      "show branches",
+      "list branches git",
+      "git local branches"
+    ],
+    "windows": "git branch",
+    "linux": "git branch",
+    "mac": "git branch",
+    "description": "Main Git command for working with branches.",
+    "examples": [
+      "git branch",
+      "git branch -a",
+      "git branch {{[-a|--all]}}",
+      "git branch {{[-a|--all]}} --contains {{commit_hash}}",
+      "git branch --show-current",
+      "git branch {{branch_name}}",
+      "git branch {{branch_name}} {{commit_hash}}",
+      "git branch {{[-m|--move]}} {{old_branch_name}} {{new_branch_name}}",
+      "git branch {{[-d|--delete]}} {{branch_name}}",
+      "git push {{remote_name}} {{[-d|--delete]}} {{remote_branch_name}}"
+    ],
+    "category": "git",
+    "riskLevel": "safe"
+  },
+  {
+    "id": "merge-git-branch",
+    "intent": "Merge git branch",
+    "aliases": [
+      "git merge",
+      "merge branches",
+      "integrate branch",
+      "git branch merge"
+    ],
+    "windows": "git merge <branch>",
+    "linux": "git merge <branch>",
+    "mac": "git merge <branch>",
+    "description": "Merge branches.",
+    "examples": [
+      "git merge main",
+      "git merge feature-branch",
+      "git merge {{branch_name1 branch_name2 ...}}",
+      "git merge {{[-e|--edit]}} {{branch_name}}",
+      "git merge --no-ff {{branch_name}}",
+      "git merge --squash {{branch_name}}",
+      "git merge --abort",
+      "git merge {{[-s|--strategy]}} {{strategy}} {{[-X|--strategy-option]}} {{strategy_option}} {{branch_name}}"
+    ],
+    "category": "git",
+    "riskLevel": "medium"
+  },
+  {
+    "id": "rebase-git-branch",
+    "intent": "Rebase git branch",
+    "aliases": [
+      "git rebase",
+      "git branch rebase",
+      "rebase commits",
+      "interactive rebase"
+    ],
+    "windows": "git rebase <branch>",
+    "linux": "git rebase <branch>",
+    "mac": "git rebase <branch>",
+    "description": "Reapply commits from one branch on top of another branch. Commonly used to \"move\" an entire branch to another base, creating copies of the commits in the new location.",
+    "examples": [
+      "git rebase main",
+      "git rebase -i HEAD~3",
+      "git rebase {{new_base_branch}}",
+      "git rebase {{[-i|--interactive]}} {{target_base_branch_or_commit_hash}}",
+      "git rebase --continue",
+      "git rebase --skip",
+      "git rebase --abort",
+      "git rebase --onto {{new_base}} {{old_base}}",
+      "git rebase {{[-i|--interactive]}} {{HEAD~5}}",
+      "git rebase {{[-X|--strategy-option]}} theirs {{branch_name}}"
+    ],
+    "category": "git",
+    "riskLevel": "high"
+  },
+  {
+    "id": "stash-git-changes",
+    "intent": "Stash git changes",
+    "aliases": [
+      "git stash",
+      "stash local changes",
+      "git save state",
+      "git stash save"
+    ],
+    "windows": "git stash",
+    "linux": "git stash",
+    "mac": "git stash",
+    "description": "Stash local Git changes in a temporary area.",
+    "examples": [
+      "git stash",
+      "git stash save \"temp work\"",
+      "git stash {{[-u|--include-untracked]}}",
+      "git stash {{[-p|--patch]}}",
+      "git stash list",
+      "git stash show {{[-p|--patch]}}",
+      "git stash pop",
+      "git stash drop",
+      "git stash clear"
+    ],
+    "category": "git",
+    "riskLevel": "safe"
+  },
+  {
+    "id": "pop-stashed-changes",
+    "intent": "Pop stashed changes",
+    "aliases": [
+      "git stash pop",
+      "restore stashed changes",
+      "apply stash",
+      "git pop stash"
+    ],
+    "windows": "git stash pop",
+    "linux": "git stash pop",
+    "mac": "git stash pop",
+    "description": "Stash local Git changes in a temporary area.",
+    "examples": [
+      "git stash pop",
+      "git stash",
+      "git stash {{[-u|--include-untracked]}}",
+      "git stash {{[-p|--patch]}}",
+      "git stash list",
+      "git stash show {{[-p|--patch]}}",
+      "git stash drop",
+      "git stash clear"
+    ],
+    "category": "git",
+    "riskLevel": "safe"
+  },
+  {
+    "id": "discard-local-changes",
+    "intent": "Discard local changes",
+    "aliases": [
+      "git reset --hard",
+      "hard reset git",
+      "discard git modifications",
+      "revert working directory"
+    ],
+    "windows": "git reset --hard",
+    "linux": "git reset --hard",
+    "mac": "git reset --hard",
+    "description": "Undo commits or unstage changes by resetting the current Git HEAD to the specified state. If a path is passed, it works as \"unstage\"; if a commit hash or branch is passed, it works as \"uncommit\".",
+    "examples": [
+      "git reset --hard HEAD",
+      "git reset --hard origin/main",
+      "git reset",
+      "git reset {{path/to/file1 path/to/file2 ...}}",
+      "git reset {{[-p|--patch]}} {{path/to/file}}",
+      "git reset HEAD~",
+      "git reset --soft HEAD~2",
+      "git reset --hard",
+      "git reset --hard {{commit}}"
+    ],
+    "category": "git",
+    "riskLevel": "critical"
+  },
+  {
+    "id": "show-git-diff",
+    "intent": "Show git diff",
+    "aliases": [
+      "git diff",
+      "view file differences",
+      "git changes diff",
+      "compare files git"
+    ],
+    "windows": "git diff",
+    "linux": "git diff",
+    "mac": "git diff",
+    "description": "Show changes to tracked files.",
+    "examples": [
+      "git diff",
+      "git diff main feature-branch",
+      "git diff HEAD",
+      "git diff --staged",
+      "git diff 'HEAD@{{{3 months|weeks|days|hours|seconds ago}}}'",
+      "git diff --stat {{commit}}",
+      "git diff --summary {{commit}}",
+      "git diff {{branch_1}}..{{branch_2}} {{path/to/file}}",
+      "git diff {{other_branch}}:{{path/to/file2}} {{path/to/file1}}"
+    ],
+    "category": "git",
+    "riskLevel": "safe"
+  }
+]
